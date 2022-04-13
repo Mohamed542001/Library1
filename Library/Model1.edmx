@@ -1,0 +1,743 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Buying Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAfterDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AdminId" Type="int" />
+        </EntityType>
+        <EntityType Name="BuyingBillDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" />
+          <Property Name="BuyingBillId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sales Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAfterDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="SalesBillDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" />
+          <Property Name="SalesBillId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Compony" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Book_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buying Bill_admin">
+          <End Role="admin" Type="Self.admin" Multiplicity="0..1" />
+          <End Role="Buying Bill" Type="Self.Buying Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buying Bill">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buying Bill_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Buying Bill" Type="Self.Buying Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buying Bill">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuyingBillDetails_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="BuyingBillDetails" Type="Self.BuyingBillDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuyingBillDetails">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuyingBillDetails_Buying Bill">
+          <End Role="Buying Bill" Type="Self.Buying Bill" Multiplicity="0..1" />
+          <End Role="BuyingBillDetails" Type="Self.BuyingBillDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buying Bill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuyingBillDetails">
+              <PropertyRef Name="BuyingBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales Bill_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sales Bill" Type="Self.Sales Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales Bill">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales Bill_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Sales Bill" Type="Self.Sales Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales Bill">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesBillDetails_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="SalesBillDetails" Type="Self.SalesBillDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesBillDetails">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesBillDetails_Sales Bill">
+          <End Role="Sales Bill" Type="Self.Sales Bill" Multiplicity="0..1" />
+          <End Role="SalesBillDetails" Type="Self.SalesBillDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales Bill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesBillDetails">
+              <PropertyRef Name="SalesBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buying Bill" EntityType="Self.Buying Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuyingBillDetails" EntityType="Self.BuyingBillDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales Bill" EntityType="Self.Sales Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesBillDetails" EntityType="Self.SalesBillDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Book_Department" Association="Self.FK_Book_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buying Bill_admin" Association="Self.FK_Buying Bill_admin">
+            <End Role="admin" EntitySet="admin" />
+            <End Role="Buying Bill" EntitySet="Buying Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buying Bill_Supplier" Association="Self.FK_Buying Bill_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Buying Bill" EntitySet="Buying Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuyingBillDetails_Book" Association="Self.FK_BuyingBillDetails_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BuyingBillDetails" EntitySet="BuyingBillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuyingBillDetails_Buying Bill" Association="Self.FK_BuyingBillDetails_Buying Bill">
+            <End Role="Buying Bill" EntitySet="Buying Bill" />
+            <End Role="BuyingBillDetails" EntitySet="BuyingBillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales Bill_Customer" Association="Self.FK_Sales Bill_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sales Bill" EntitySet="Sales Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales Bill_User" Association="Self.FK_Sales Bill_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Sales Bill" EntitySet="Sales Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesBillDetails_Book" Association="Self.FK_SalesBillDetails_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="SalesBillDetails" EntitySet="SalesBillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesBillDetails_Sales Bill" Association="Self.FK_SalesBillDetails_Sales Bill">
+            <End Role="Sales Bill" EntitySet="Sales Bill" />
+            <End Role="SalesBillDetails" EntitySet="SalesBillDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="LibraryModel.admin" />
+          <EntitySet Name="Books" EntityType="LibraryModel.Book" />
+          <EntitySet Name="Customers" EntityType="LibraryModel.Customer" />
+          <EntitySet Name="Departments" EntityType="LibraryModel.Department" />
+          <EntitySet Name="Sales_Bills" EntityType="LibraryModel.Sales_Bill" />
+          <EntitySet Name="SalesBillDetails" EntityType="LibraryModel.SalesBillDetail" />
+          <EntitySet Name="sysdiagrams" EntityType="LibraryModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="LibraryModel.User" />
+          <AssociationSet Name="FK_Book_Department" Association="LibraryModel.FK_Book_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesBillDetails_Book" Association="LibraryModel.FK_SalesBillDetails_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="SalesBillDetail" EntitySet="SalesBillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Bill_Customer" Association="LibraryModel.FK_Sales_Bill_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sales_Bill" EntitySet="Sales_Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Bill_User" Association="LibraryModel.FK_Sales_Bill_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Sales_Bill" EntitySet="Sales_Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesBillDetails_Sales_Bill" Association="LibraryModel.FK_SalesBillDetails_Sales_Bill">
+            <End Role="Sales_Bill" EntitySet="Sales_Bills" />
+            <End Role="SalesBillDetail" EntitySet="SalesBillDetails" />
+          </AssociationSet>
+          <EntitySet Name="Buying_Bills" EntityType="LibraryModel.Buying_Bill" />
+          <EntitySet Name="BuyingBillDetails" EntityType="LibraryModel.BuyingBillDetail" />
+          <EntitySet Name="Suppliers" EntityType="LibraryModel.Supplier" />
+          <AssociationSet Name="FK_Buying_Bill_admin" Association="LibraryModel.FK_Buying_Bill_admin">
+            <End Role="admin" EntitySet="admins" />
+            <End Role="Buying_Bill" EntitySet="Buying_Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuyingBillDetails_Book" Association="LibraryModel.FK_BuyingBillDetails_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="BuyingBillDetail" EntitySet="BuyingBillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buying_Bill_Supplier" Association="LibraryModel.FK_Buying_Bill_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Buying_Bill" EntitySet="Buying_Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuyingBillDetails_Buying_Bill" Association="LibraryModel.FK_BuyingBillDetails_Buying_Bill">
+            <End Role="Buying_Bill" EntitySet="Buying_Bills" />
+            <End Role="BuyingBillDetail" EntitySet="BuyingBillDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buying_Bill" Relationship="LibraryModel.FK_Buying_Bill_admin" FromRole="admin" ToRole="Buying_Bill" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department_Id" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="LibraryModel.FK_Book_Department" FromRole="Book" ToRole="Department" />
+          <NavigationProperty Name="SalesBillDetails" Relationship="LibraryModel.FK_SalesBillDetails_Book" FromRole="Book" ToRole="SalesBillDetail" />
+          <NavigationProperty Name="BuyingBillDetails" Relationship="LibraryModel.FK_BuyingBillDetails_Book" FromRole="Book" ToRole="BuyingBillDetail" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Sales_Bill" Relationship="LibraryModel.FK_Sales_Bill_Customer" FromRole="Customer" ToRole="Sales_Bill" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="LibraryModel.FK_Book_Department" FromRole="Department" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Sales_Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAfterDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="LibraryModel.FK_Sales_Bill_Customer" FromRole="Sales_Bill" ToRole="Customer" />
+          <NavigationProperty Name="User" Relationship="LibraryModel.FK_Sales_Bill_User" FromRole="Sales_Bill" ToRole="User" />
+          <NavigationProperty Name="SalesBillDetails" Relationship="LibraryModel.FK_SalesBillDetails_Sales_Bill" FromRole="Sales_Bill" ToRole="SalesBillDetail" />
+        </EntityType>
+        <EntityType Name="SalesBillDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" />
+          <Property Name="SalesBillId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Book" Relationship="LibraryModel.FK_SalesBillDetails_Book" FromRole="SalesBillDetail" ToRole="Book" />
+          <NavigationProperty Name="Sales_Bill" Relationship="LibraryModel.FK_SalesBillDetails_Sales_Bill" FromRole="SalesBillDetail" ToRole="Sales_Bill" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sales_Bill" Relationship="LibraryModel.FK_Sales_Bill_User" FromRole="User" ToRole="Sales_Bill" />
+        </EntityType>
+        <Association Name="FK_Book_Department">
+          <End Type="LibraryModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="LibraryModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Department_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesBillDetails_Book">
+          <End Type="LibraryModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="LibraryModel.SalesBillDetail" Role="SalesBillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesBillDetail">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Bill_Customer">
+          <End Type="LibraryModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="LibraryModel.Sales_Bill" Role="Sales_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales_Bill">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Bill_User">
+          <End Type="LibraryModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="LibraryModel.Sales_Bill" Role="Sales_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales_Bill">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesBillDetails_Sales_Bill">
+          <End Type="LibraryModel.Sales_Bill" Role="Sales_Bill" Multiplicity="0..1" />
+          <End Type="LibraryModel.SalesBillDetail" Role="SalesBillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales_Bill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesBillDetail">
+              <PropertyRef Name="SalesBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Buying_Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAfterDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AdminId" Type="Int32" />
+          <NavigationProperty Name="admin" Relationship="LibraryModel.FK_Buying_Bill_admin" FromRole="Buying_Bill" ToRole="admin" />
+          <NavigationProperty Name="Supplier" Relationship="LibraryModel.FK_Buying_Bill_Supplier" FromRole="Buying_Bill" ToRole="Supplier" />
+          <NavigationProperty Name="BuyingBillDetails" Relationship="LibraryModel.FK_BuyingBillDetails_Buying_Bill" FromRole="Buying_Bill" ToRole="BuyingBillDetail" />
+        </EntityType>
+        <EntityType Name="BuyingBillDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" />
+          <Property Name="BuyingBillId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Book" Relationship="LibraryModel.FK_BuyingBillDetails_Book" FromRole="BuyingBillDetail" ToRole="Book" />
+          <NavigationProperty Name="Buying_Bill" Relationship="LibraryModel.FK_BuyingBillDetails_Buying_Bill" FromRole="BuyingBillDetail" ToRole="Buying_Bill" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Compony" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Buying_Bill" Relationship="LibraryModel.FK_Buying_Bill_Supplier" FromRole="Supplier" ToRole="Buying_Bill" />
+        </EntityType>
+        <Association Name="FK_Buying_Bill_admin">
+          <End Type="LibraryModel.admin" Role="admin" Multiplicity="0..1" />
+          <End Type="LibraryModel.Buying_Bill" Role="Buying_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buying_Bill">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuyingBillDetails_Book">
+          <End Type="LibraryModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="LibraryModel.BuyingBillDetail" Role="BuyingBillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuyingBillDetail">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buying_Bill_Supplier">
+          <End Type="LibraryModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="LibraryModel.Buying_Bill" Role="Buying_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buying_Bill">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuyingBillDetails_Buying_Bill">
+          <End Type="LibraryModel.Buying_Bill" Role="Buying_Bill" Multiplicity="0..1" />
+          <End Type="LibraryModel.BuyingBillDetail" Role="BuyingBillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buying_Bill">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuyingBillDetail">
+              <PropertyRef Name="BuyingBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="LibraryModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="LibraryModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="Department_Id" ColumnName="Department_Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="LibraryModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="LibraryModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales_Bills">
+            <EntityTypeMapping TypeName="LibraryModel.Sales_Bill">
+              <MappingFragment StoreEntitySet="Sales Bill">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TotalAfterDiscount" ColumnName="TotalAfterDiscount" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesBillDetails">
+            <EntityTypeMapping TypeName="LibraryModel.SalesBillDetail">
+              <MappingFragment StoreEntitySet="SalesBillDetails">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SalesBillId" ColumnName="SalesBillId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="LibraryModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LibraryModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buying_Bills">
+            <EntityTypeMapping TypeName="LibraryModel.Buying_Bill">
+              <MappingFragment StoreEntitySet="Buying Bill">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="TotalAfterDiscount" ColumnName="TotalAfterDiscount" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuyingBillDetails">
+            <EntityTypeMapping TypeName="LibraryModel.BuyingBillDetail">
+              <MappingFragment StoreEntitySet="BuyingBillDetails">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="BuyingBillId" ColumnName="BuyingBillId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="LibraryModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Compony" ColumnName="Compony" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
